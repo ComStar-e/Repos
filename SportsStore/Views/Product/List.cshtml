@@ -1,6 +1,7 @@
-﻿@model  IEnumerable<Product>
+﻿@model ProductsListViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-@foreach (var p in Model)
+@foreach (var p in Model.Products)
 {
     <div>
         <h3>@p.Name</h3>
@@ -9,3 +10,6 @@
     </div>
 
 }
+
+<div asp-action="HOme">Pagination</div>
+<div asp-action="www.google.com">Home</div>
