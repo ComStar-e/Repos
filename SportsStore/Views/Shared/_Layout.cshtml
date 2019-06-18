@@ -5,12 +5,22 @@
     <meta name="viewport" content="width=device-width" />
     <title>SportsStore</title>
     <link rel="stylesheet" 
-          asp-href-include="/LIB/*.min.css"
+          asp-href-include="/LIB/BootStrap/*.min.css"
           asp-href-exclude="**/*-reboot*, **/*-grid*"/>
+    <link rel="stylesheet" asp-href-include="/LIB/fontawesome/*.css" />
+
 </head>
 <body>
     <div class="navbar navbar-inverse bg-inverse" role="navigation">
-        <a class="navbar-brand" href="#">SportsStore</a>
+        <div class="row">
+            <a class="col navbar-brand" href="#">
+                SPORTs Strore
+            </a>
+            <div class="col-4 text-right">
+                @await Component.InvokeAsync("CartSummary")
+            </div>
+        </div>
+        <!--<a class="navbar-brand" href="#">SportsStore</a>-->
     </div>
     <div class="row m-1 p-1">
         <div class="col-3" id="categories">
