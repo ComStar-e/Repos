@@ -4,33 +4,29 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>SportsStore</title>
-    <link rel="stylesheet" 
+    <link rel="stylesheet"
           asp-href-include="/LIB/BootStrap/*.min.css"
-          asp-href-exclude="**/*-reboot*, **/*-grid*"/>
-    <link rel="stylesheet" asp-href-include="/LIB/fontawesome/*.css" />
+          asp-href-exclude="**/*-reboot*, **/*-grid*" />
+    <link rel="stylesheet" asp-href-include="/LIB/fontawesome/css/*.css" />
+    <!--<link rel="stylesheet" href="~/LIB/fontawesome/css/font-awesome.min.css" />-->
 
 </head>
-<body>
+<<body>
     <div class="navbar navbar-inverse bg-inverse" role="navigation">
         <div class="row">
-            <a class="col navbar-brand" href="#">
-                SPORTs Strore
-            </a>
+            <a class="col navbar-brand" href="#">SPORTS STORE</a>
             <div class="col-4 text-right">
                 @await Component.InvokeAsync("CartSummary")
             </div>
         </div>
-        <!--<a class="navbar-brand" href="#">SportsStore</a>-->
     </div>
     <div class="row m-1 p-1">
-        <div class="col-3" id="categories">
+        <div id="categories" class="col-3">
             @await Component.InvokeAsync("NavigationMenu")
         </div>
-
         <div class="col-9">
             @RenderBody()
         </div>
     </div>
-    
 </body>
 </html>

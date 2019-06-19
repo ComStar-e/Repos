@@ -32,6 +32,7 @@ namespace SportsStore
             
             // DB Data
             services.AddTransient<IProductRepository, EFProductRepository>();
+            services.AddTransient<IOrderRepository, EFOrderRepository>();
 
             // Fake Data //
             //services.AddTransient<IProductRepository, FakeProductRepository>();
