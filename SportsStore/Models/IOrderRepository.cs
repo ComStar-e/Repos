@@ -6,5 +6,6 @@ namespace SportsStore.Models
     {
         IQueryable<Order> Orders { get; }
         void SaveOrder(Order order);
+               
     }
 }

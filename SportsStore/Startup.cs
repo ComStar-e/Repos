@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SportsStore.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace SportsStore
 {
@@ -22,7 +23,18 @@ namespace SportsStore
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            /////////////// DataBase Connections
+            // Products Db Connection
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration["Data:SportStoreProducts:ConnectionString"]));
+
+            // Identity Db Connection
+            services.AddDbContext<AppIdentityDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration["Data:SportStoreIdentity:ConnectionString"]));
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppIdentityDbContext>()                                          
+                .AddDefaultTokenProviders();
 
 
             // Session
@@ -41,7 +53,7 @@ namespace SportsStore
             // Session Services
             services.AddMemoryCache();
             services.AddSession();
-
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,11 +69,13 @@ namespace SportsStore
                 await context.Response.WriteAsync("Hello World!");
             });*/
             app.UseDeveloperExceptionPage();
-            //app.UseBrowserLink();
-            //app.UseDeveloperExceptionPage();
+            //app.UseBrowserLink();            
             app.UseStatusCodePages();
             app.UseStaticFiles();
-            app.UseSession();
+
+            app.UseSession();  // For Session using in the App
+            app.UseAuthentication(); // for Authentication using in the App
+
             app.UseMvc(routes => {
                 routes.MapRoute(
                     name: null,
@@ -90,6 +104,7 @@ namespace SportsStore
 
             });
             SeedData.EnsurePopulated(app);
+            IdentitySeedData.EnsurePopulated(app);
         }
     }
 }
